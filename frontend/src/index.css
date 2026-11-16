@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/*
+  Design tokens: the single source of truth for colors, fonts and shadows.
+  Components must only use these names (bg-primary-500, text-ink, ...), never raw hex values.
+  The values are close estimates taken from the Figma video. Replace them with the exact
+  values from the Figma Inspect panel when you have them.
+*/
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-primary-50: #f5f2ff;
+  --color-primary-100: #ece6ff;
+  --color-primary-200: #dbd0ff;
+  --color-primary-300: #c0acff;
+  --color-primary-400: #a183fb;
+  --color-primary-500: #845ff9;
+  --color-primary-600: #693dd9;
+  --color-primary-700: #552fb3;
+  --color-primary-800: #3f2380;
+  --color-primary-900: #2a1659;
+
+  --color-accent: #a855d8;
+
+  --color-canvas: #faf9ff;
+  --color-ink: #130f2e;
+  --color-ink-soft: #5d5a78;
+  --color-line: #e8e4f5;
+
+  --color-success: #22b07d;
+  --color-warning: #f59e42;
+  --color-danger: #e5484d;
+
+  /* One fixed color per AI module, used everywhere (landing, modules page, history) */
+  --color-module-analyst: #845ff9;
+  --color-module-manager: #4f9df7;
+  --color-module-code: #22b07d;
+  --color-module-analyzer: #f59e42;
+  --color-module-docs: #ec5fa5;
+  --color-module-studio: #14b8a6;
+
+  --shadow-glass:
+    0 10px 40px -12px rgb(105 61 217 / 0.18), 0 2px 8px -2px rgb(19 15 46 / 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* keeps section titles from hiding under the fixed navbar when we scroll to them */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
