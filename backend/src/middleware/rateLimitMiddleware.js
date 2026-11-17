@@ -35,3 +35,11 @@ export const apiLimiter = createLimiter({
   limit: 600,
   message: "Too many requests. Please slow down and try again in a few minutes.",
 });
+
+
+// AI requests cost money and time, so they have their own, stricter limit.
+export const aiLimiter = createLimiter({
+  windowMs: 60 * 1000,
+  limit: 10,
+  message: "You are sending requests too fast. Please wait a minute and try again.",
+});

@@ -7,6 +7,8 @@ import { env } from "./config/env.js";
 import { authRoutes } from "./routes/authRoutes.js";
 import { projectRoutes } from "./routes/projectRoutes.js";
 import { dashboardRoutes } from "./routes/dashboardRoutes.js";
+import { aiRoutes } from "./routes/aiRoutes.js";
+import { generationRoutes } from "./routes/generationRoutes.js";
 import { apiLimiter } from "./middleware/rateLimitMiddleware.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
@@ -20,6 +22,9 @@ export function createApp() {
   app.use(helmet());
   // credentials: true lets the browser send and receive the refresh-token cookie
   app.use(cors({ origin: env.clientOrigins, credentials: true }));
+  // AI prompts (for example pasted code) can be long, so this one path accepts bigger requests.
+  // It must come before the general parser below, which only allows 10kb.
+  app.use("/api/ai", express.json({ limit: "64kb" }));
   app.use(express.json({ limit: "10kb" }));
   app.use(cookieParser());
   if (!env.isProduction) app.use(morgan("dev"));
@@ -34,6 +39,8 @@ export function createApp() {
   app.use("/api/auth", authRoutes);
   app.use("/api/projects", projectRoutes);
   app.use("/api/dashboard", dashboardRoutes);
+  app.use("/api/ai", aiRoutes);
+  app.use("/api/generations", generationRoutes);
 
   app.use(notFound);
   app.use(errorHandler);

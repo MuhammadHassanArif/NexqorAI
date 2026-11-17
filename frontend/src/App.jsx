@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
-import { CircleHelp, CreditCard, History, Settings, Sparkles } from "lucide-react";
+import { CircleHelp, CreditCard, Settings } from "lucide-react";
 import { AuthProvider } from "./context/AuthContext";
 import { PublicLayout } from "./layouts/PublicLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
@@ -12,6 +12,9 @@ import { Login } from "./pages/auth/Login";
 import { Signup } from "./pages/auth/Signup";
 import { Overview } from "./pages/dashboard/Overview";
 import { Projects } from "./pages/dashboard/Projects";
+import { Modules } from "./pages/dashboard/Modules";
+import { ModuleWorkspace } from "./pages/dashboard/ModuleWorkspace";
+import { GenerationHistory } from "./pages/dashboard/GenerationHistory";
 import { ComingSoon } from "./pages/dashboard/ComingSoon";
 import { ROUTES } from "./constants/routes";
 
@@ -39,26 +42,9 @@ export default function App() {
               <Route path={ROUTES.dashboard} element={<DashboardLayout />}>
                 <Route index element={<Overview />} />
                 <Route path="projects" element={<Projects />} />
-                <Route
-                  path="modules"
-                  element={
-                    <ComingSoon
-                      title="AI Modules"
-                      icon={Sparkles}
-                      description="The six AI assistants will open here."
-                    />
-                  }
-                />
-                <Route
-                  path="history"
-                  element={
-                    <ComingSoon
-                      title="Generation History"
-                      icon={History}
-                      description="Your saved AI results will appear here."
-                    />
-                  }
-                />
+                <Route path="modules" element={<Modules />} />
+                <Route path="modules/:moduleId" element={<ModuleWorkspace />} />
+                <Route path="history" element={<GenerationHistory />} />
                 <Route
                   path="settings"
                   element={
